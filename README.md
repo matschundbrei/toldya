@@ -17,7 +17,7 @@ $ python3 -m venv venv
 $ . ./venv/bin/activate
 $ pip install -r requirements.txt
 $ export SQLALCHEMY_DATABASE_URI="~/mytell.db"
-$ export FLASK_APP=toldya.py
+$ export FLASK_APP=toldya
 $ export FLASK_ENV=development
 $ flask db migrate
 $ flask db upgrade
