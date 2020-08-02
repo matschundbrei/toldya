@@ -4,8 +4,7 @@ import hashlib
 import json
 import uuid
 from datetime import datetime
-from flask import Flask
-from flask import request, redirect, render_template, send_from_directory
+from flask import Flask, request, redirect, render_template, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_sessionstore import Session
