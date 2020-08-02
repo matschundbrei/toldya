@@ -3,3 +3,4 @@ flask_sqlalchemy
 flask_migrate
 flask_sessionstore
 flask_session_captcha
+uwsgi

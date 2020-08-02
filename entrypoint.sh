@@ -3,4 +3,4 @@
 # the virtual env needs to be activated!
 flask db migrate
 flask db upgrade
-flask run --host=0.0.0.0
+uwsgi --ini uwsgi.ini

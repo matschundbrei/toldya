@@ -33,8 +33,8 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 8080
 
+ENV FLASK_APP toldya
 # run it
-ENV FLASK_APP='toldya.py'
 CMD ["./entrypoint.sh"]

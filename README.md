@@ -10,7 +10,7 @@ Enjoy!
 
 ## Setup
 
-This is a flask application. You can run it like this:
+This is a flask application. You can run it like this (for development):
 
 ```shell
 $ python3 -m venv venv
@@ -18,10 +18,13 @@ $ . ./venv/bin/activate
 $ pip install -r requirements.txt
 $ export SQLALCHEMY_DATABASE_URI="~/mytell.db"
 $ export FLASK_APP=toldya.py
+$ export FLASK_ENV=development
 $ flask db migrate
 $ flask db upgrade
 $ flask run
 ```
+
+This ends bringing up a development environment of this at port 5000 (the default Flask port).
 There are a few environment variables that let you control how flask behaves and you can read more about them in the [upstream documentation](https://flask.palletsprojects.com/en/1.1.x/config/#builtin-configuration-values).
 
 For this particulat instance I've tried and give most of them reasonable values.
@@ -34,6 +37,37 @@ This defines your backend database, so you want to have that defined to somethin
 work, but you can use any database supported by the SQLAlchemy ORM. Detailed description on the url
 format can be found again in the [upstream documentation](https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls)
 
+### Run in production
+
+For production I would recommend at least a different location for the database as `/tmp/tell.db`.
+Ideally you'll set up a db at a remote RDBMS and expose it via the afforementioned `SQLALCHEMY_DATABASE_URI`.
+
+Also as mentioned in the [upstream documentation]() you might not want to use the Flas webserver for production.
+In this repo (and in `requirements.txt`) we provide an alternative with uwsgi and the shipped `uwsgi.ini`
+to run this app in uwsgi exposed at port 8080 with `uwsgi --ini uwsgi.ini`.
+
+You might also run this with a systemd-service, that could look like this:
+
+```ini
+[Unit]
+Description=uWSGI instance to serve toldya app
+After=network.target
+
+[Service]
+User=naflask
+Group=www-data
+WorkingDirectory=/path/to/wherever/you/checked/this/out
+ExecStart=/path/to/wherever/you/checked/this/out/venv/bin/uwsgi --ini uwsgi.ini
+
+[Install]
+WantedBy=multi-user.target
+```
+
 ### Run with Docker
 
-TODO ;)
+I've included a `Dockerfile` in this repo that will plug together an alpine-based image
+running uwsgi to serve this app. Keep in mind, that you might want to mount an
+external volume to save the db file that you can set via `SQLALCHEMY_DATABASE_URI`.
+
+If you go ahead and run `docker build -t toldya .` from the checked out repo,
+you can run `docker run -p 8080:8080 -e SQLALCHEMY_DATABASE_URI=sqlite:////tmp/toldya.db -v /path/on/your/system/dbfile.db:/data/toldya.db -it toldya` to keep your sqlite3 db in `/path/on/your/system/dbfile.db`

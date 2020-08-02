@@ -2,3 +2,4 @@
 conf.yml
 test.db
 **/__pycache__/*
+*.swp
