@@ -1,37 +1,26 @@
-<!DOCTYPE html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Toldya</title>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="pure-g">
-  <div class="pure-u-1-5">
+{% include 'header.html' %}
+<div class="pure-g">
+  <div class="pure-u-1-12">&nbsp;</div>
+  <div class="pure-u-20-24">
+    <p>&nbsp;</p>
+    <p>
+    <strong>{{ tell.person }}</strong> told <strong>{{ tell.target }}</strong>:
+    </p><p>
+    <blockquote>
+    {{ tell.text }}
+    </blockquote>
+    </p><p>
+    <em>created at {{ tell.date }}</em>
+    </p>
+    {% if not tell.ispub %}
+    <p><em>
+    The id is: {{ tell.id }}
+    </em></p>
+    {% endif %}
+    <p>
+    <a href="/">return to start</a>
+    </p>
   </div>
-  <div class="pure-u-3-5">
-  <p>&nbsp;</p>
-  <p>
-  <strong>{{ tell.person }}</strong> told <strong>{{ tell.target }}</strong>:
-  </p><p>
-  <blockquote>
-  {{ tell.text }}
-  </blockquote>
-  </p><p>
-  <em>created at {{ tell.date }}</em>
-  </p>
-  {% if not tell.ispub %}
-  <p><em>
-  The id is: {{ tell.id }}
-  </em></p>
-  {% endif %}
-  <p>
-  <a href="/">return to start</a>
-  </p>
-  </div>
-  <div class="pure-u-1-5">
-  </div>
-  </div>
-  </body>
-</html>
+  <div class="pure-u-1-12">&nbsp;</div>
+</div>
+{% include 'footer.html' %}
