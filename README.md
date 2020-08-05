@@ -13,15 +13,15 @@ Enjoy!
 This is a flask application. You can run it like this (for development):
 
 ```shell
-$ python3 -m venv venv
-$ . ./venv/bin/activate
-$ pip install -r requirements.txt
-$ export SQLALCHEMY_DATABASE_URI="~/mytell.db"
-$ export FLASK_APP=toldya
-$ export FLASK_ENV=development
-$ flask db migrate
-$ flask db upgrade
-$ flask run
+python3 -m venv venv
+. ./venv/bin/activate
+pip install -r requirements.txt
+export SQLALCHEMY_DATABASE_URI="sqlite:///test.db"
+export FLASK_APP=toldya
+export FLASK_ENV=development
+flask db migrate
+flask db upgrade
+flask run
 ```
 
 This ends bringing up a development environment of this at port 5000 (the default Flask port).
