@@ -46,7 +46,7 @@ Also as mentioned in the [upstream documentation]() you might not want to use th
 In this repo (and in `requirements.txt`) we provide an alternative with uwsgi and the shipped `uwsgi.ini`
 to run this app in uwsgi exposed at port 8080 with `uwsgi --ini uwsgi.ini`.
 
-You might also run this with a systemd-service, that could look like this:
+You might also run this with a systemd-service, that could look something like this:
 
 ```ini
 [Unit]
@@ -69,5 +69,10 @@ I've included a `Dockerfile` in this repo that will plug together an alpine-base
 running uwsgi to serve this app. Keep in mind, that you might want to mount an
 external volume to save the db file that you can set via `SQLALCHEMY_DATABASE_URI`.
 
-If you go ahead and run `docker build -t toldya .` from the checked out repo,
-you can run `docker run -p 8080:8080 -e SQLALCHEMY_DATABASE_URI=sqlite:////tmp/toldya.db -v /path/on/your/system/dbfile.db:/data/toldya.db -it toldya` to keep your sqlite3 db in `/path/on/your/system/dbfile.db`
+If you go ahead and run `docker build -t toldya .` from the directory you've cloned
+this repo to. The database is by default stored to `/data/toldya.db` in the container
+and the `/data` directory is exposed as a volume, so you can mount it to your system
+to generate persistance with the default sqlite3 database.
+
+Remember that you can just as well set the above mentioned environment variable to
+an external database as well.

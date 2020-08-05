@@ -36,5 +36,7 @@ RUN pip install -r requirements.txt
 EXPOSE 8080
 
 ENV FLASK_APP toldya
+ENV SQLALCHEMY_DATABASE_URI=sqlite:////data/toldya.db
+VOLUME [ "/data" ]
 # run it
 CMD ["./entrypoint.sh"]
